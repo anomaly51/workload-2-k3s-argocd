@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: monitoring-agent
+  name: prometheus
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,37 +11,28 @@ spec:
   project: gitops-apps
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
-    chart: kube-prometheus-stack
-    targetRevision: 85.2.0
+    chart: prometheus
+    targetRevision: 29.7.0
     helm:
-      releaseName: prometheus-agent
+      releaseName: prometheus
       values: |
-        defaultRules:
-          create: false
+        configmapReload:
+          prometheus:
+            enabled: false
         alertmanager:
           enabled: false
-        grafana:
+        prometheus-pushgateway:
           enabled: false
-          forceDeployDashboards: false
-          forceDeployDatasources: false
         prometheus:
-          enabled: true
-          agentMode: true
-          prometheusSpec:
-            externalLabels:
+          enabled: false
+        server:
+          global:
+            external_labels:
               cluster: workload-2
-            remoteWrite:
-              - url: http://192.168.1.104:30090/api/v1/write
-            serviceMonitorSelectorNilUsesHelmValues: false
-            podMonitorSelectorNilUsesHelmValues: false
-            probeSelectorNilUsesHelmValues: false
-            scrapeConfigSelectorNilUsesHelmValues: false
-        kubeEtcd:
-          enabled: false
-        kubeControllerManager:
-          enabled: false
-        kubeScheduler:
-          enabled: false
+          persistentVolume:
+            enabled: false
+          remoteWrite:
+            - url: http://192.168.1.104:30090/api/v1/write
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
