@@ -164,7 +164,11 @@ spec:
               fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
               NODE
 
-              exec node "$DIST" "$OBSIDIAN_VAULT_DIR" --settings "$SETTINGS" --interval 15 daemon
+              while true; do
+                node "$DIST" "$OBSIDIAN_VAULT_DIR" --settings "$SETTINGS" --interval 15 daemon || true
+                echo "LiveSync daemon exited; retrying in 60s"
+                sleep 60
+              done
           env:
             - name: OBSIDIAN_LIVESYNC_CLI_REF
               value: "0.25.62"
