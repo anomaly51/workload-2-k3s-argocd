@@ -35,7 +35,7 @@ spec:
             - -ec
             - |
               if [ ! -d /opt/data/python-packages/faster_whisper ]; then
-                /opt/hermes/.venv/bin/python -m pip install --no-cache-dir \
+                uv pip install --python /opt/hermes/.venv/bin/python --no-cache-dir \
                   --target /opt/data/python-packages \
                   faster-whisper==1.2.1
               fi
