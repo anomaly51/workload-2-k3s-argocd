@@ -126,7 +126,7 @@ spec:
                 rm -rf "$CLI_DIR"
                 git clone --depth 1 --branch "$CLI_REF" --recurse-submodules https://github.com/vrtmrz/obsidian-livesync.git "$CLI_DIR"
                 cd "$CLI_DIR"
-                if [ -f package-lock.json ]; then npm ci; else npm install; fi
+                if [ -f package-lock.json ]; then npm ci || npm install; else npm install; fi
                 cd src/apps/cli
                 npm run build
               fi
