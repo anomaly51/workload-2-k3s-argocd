@@ -7,6 +7,9 @@ spec:
   description: Generic project for applications managed by this GitOps repository.
   sourceRepos:
     - https://github.com/anomaly51/workload-2-k3s-argocd.git
+    - https://charts.jetstack.io
+    - https://charts.external-secrets.io
+    - https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
   destinations:
     - server: https://kubernetes.default.svc
       namespace: "*"
