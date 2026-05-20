@@ -132,7 +132,7 @@ spec:
               fi
 
               mkdir -p "$OBSIDIAN_VAULT_DIR" "$OBSIDIAN_INBOX_DIR" "$SETTINGS_DIR"
-              if ! node -e 'const fs=require("fs"); const p=process.argv[1]; const s=JSON.parse(fs.readFileSync(p,"utf8")); process.exit(s && s.isConfigured && s.couchDB_URI && s.couchDB_USER && s.couchDB_PASSWORD && s.couchDB_DBNAME ? 0 : 1)' "$SETTINGS" 2>/dev/null; then
+              if ! node -e 'const fs=require("fs"); const p=process.argv[1]; const s=JSON.parse(fs.readFileSync(p,"utf8")); const rc=s && s.remoteConfigurations && Object.keys(s.remoteConfigurations).length > 0; const legacy=s && s.couchDB_URI && s.couchDB_USER && s.couchDB_PASSWORD && s.couchDB_DBNAME; process.exit(s && s.isConfigured && (rc || legacy) ? 0 : 1)' "$SETTINGS" 2>/dev/null; then
                 echo "Configuring Self-hosted LiveSync CLI settings"
                 node "$DIST" init-settings --force "$SETTINGS"
                 node - "$SETTINGS" <<'NODE'
