@@ -22,7 +22,8 @@ spec:
         storageClass:
           name: nfs-client
           defaultClass: true
-          archiveOnDelete: false
+          archiveOnDelete: true
+          reclaimPolicy: Retain
   destination:
     server: https://kubernetes.default.svc
     namespace: nfs-system
