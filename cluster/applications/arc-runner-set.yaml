@@ -1,25 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: arc-runner-set
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   annotations:
-    argocd.argoproj.io/sync-wave: "10"
+    argocd.argoproj.io/sync-wave: "50"
 spec:
   project: gitops-apps
   source:
-    repoURL: https://charts.jetstack.io
-    chart: cert-manager
-    targetRevision: v1.20.2
+    repoURL: ghcr.io/actions/actions-runner-controller-charts
+    chart: gha-runner-scale-set
+    targetRevision: 0.14.1
     helm:
-      releaseName: cert-manager
+      releaseName: anomaly51-runner
       values: |
-        installCRDs: true
+        githubConfigUrl: "https://github.com/anomaly51"
+        githubConfigSecret: arc-github-token
+        containerMode:
+          type: "dind"
   destination:
     server: https://kubernetes.default.svc
-    namespace: cert-manager
+    namespace: arc-runners
   syncPolicy:
     automated:
       prune: true

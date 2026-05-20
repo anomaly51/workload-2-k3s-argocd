@@ -1,24 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: storage-class-defaults
+  name: cloudflared
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "40"
 spec:
   project: gitops-apps
   source:
     repoURL: https://github.com/anomaly51/workload-2-k3s-argocd.git
     targetRevision: main
-    path: infrastructure/storage-classes
+    path: apps/cloudflared
   destination:
     server: https://kubernetes.default.svc
-    namespace: kube-system
+    namespace: cloudflared
   syncPolicy:
     automated:
-      prune: false
+      prune: true
       selfHeal: true
     syncOptions:
+      - CreateNamespace=true
       - ServerSideApply=true

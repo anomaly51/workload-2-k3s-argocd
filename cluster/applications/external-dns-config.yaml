@@ -1,25 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: external-dns-config
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   annotations:
-    argocd.argoproj.io/sync-wave: "10"
+    argocd.argoproj.io/sync-wave: "40"
 spec:
   project: gitops-apps
   source:
-    repoURL: https://charts.jetstack.io
-    chart: cert-manager
-    targetRevision: v1.20.2
-    helm:
-      releaseName: cert-manager
-      values: |
-        installCRDs: true
+    repoURL: https://github.com/anomaly51/workload-2-k3s-argocd.git
+    targetRevision: main
+    path: apps/external-dns
   destination:
     server: https://kubernetes.default.svc
-    namespace: cert-manager
+    namespace: external-dns
   syncPolicy:
     automated:
       prune: true

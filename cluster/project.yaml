@@ -10,6 +10,9 @@ spec:
     - https://charts.jetstack.io
     - https://charts.external-secrets.io
     - https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+    - https://kubernetes-sigs.github.io/external-dns/
+    - ghcr.io/actions/actions-runner-controller-charts
+    - oci://ghcr.io/actions/actions-runner-controller-charts
   destinations:
     - server: https://kubernetes.default.svc
       namespace: "*"
