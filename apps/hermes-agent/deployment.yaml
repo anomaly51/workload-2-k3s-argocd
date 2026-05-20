@@ -26,6 +26,29 @@ spec:
     spec:
       imagePullSecrets:
         - name: harbor-pull-secret
+      initContainers:
+        - name: install-faster-whisper
+          image: harbor.api-api-api.com/hermes-agent/gateway:main-8-a01b9718f29cdefaf997d86c6ce08b859c88a487
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -ec
+            - |
+              if [ ! -d /opt/data/python-packages/faster_whisper ]; then
+                /opt/hermes/.venv/bin/python -m pip install --no-cache-dir \
+                  --target /opt/data/python-packages \
+                  faster-whisper==1.2.1
+              fi
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 3Gi
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
       containers:
         - name: gateway
           image: harbor.api-api-api.com/hermes-agent/gateway:main-8-a01b9718f29cdefaf997d86c6ce08b859c88a487
@@ -64,6 +87,10 @@ spec:
               value: gpt-4o-transcribe
             - name: STT_OPENAI_BASE_URL
               value: https://api.openai.com/v1
+            - name: PYTHONPATH
+              value: /opt/data/python-packages
+            - name: HF_HOME
+              value: /opt/data/cache/huggingface
             - name: OBSIDIAN_VAULT_DIR
               value: /opt/data/workspace/obsidian-vault
             - name: OBSIDIAN_INBOX_DIR
