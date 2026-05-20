@@ -6,5 +6,6 @@ resources:
   - applications/cert-manager.yaml
   - applications/external-secrets.yaml
   - applications/nfs-provisioner.yaml
+  - applications/storage-class-defaults.yaml
   - applications/vault-store.yaml
   - applications/cert-manager-issuers.yaml
