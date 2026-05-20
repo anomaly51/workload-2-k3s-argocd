@@ -3,5 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - external-secret.yaml
+  - argocd-ingress.yaml
+  - argocd-serverstransport.yaml
   - configmap.yaml
   - deployment.yaml
