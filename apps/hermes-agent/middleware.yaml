@@ -8,6 +8,6 @@ metadata:
     app.kubernetes.io/part-of: workflow-2
 spec:
   redirectRegex:
-    regex: "^https?://(hermes-agent|architect-business-bot)\\.api-api-api\\.com/?$"
-    replacement: "https://${1}.api-api-api.com/health"
+    regex: "^https?://hermes-agent\\.api-api-api\\.com/?$"
+    replacement: "https://hermes-agent.api-api-api.com/health"
     permanent: false
