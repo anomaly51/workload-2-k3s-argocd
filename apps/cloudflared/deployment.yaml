@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       annotations:
-        config.kubernetes.io/reload: hermes-agent-host-route-v1
+        config.kubernetes.io/reload: shared-tunnel-routes-v3
       labels:
         app: cloudflared
     spec:
