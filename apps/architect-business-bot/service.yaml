@@ -3,6 +3,10 @@ kind: Service
 metadata:
   name: architect-business-bot
   namespace: architect-business-bot
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: "80"
   labels:
     app.kubernetes.io/name: architect-business-bot
     app.kubernetes.io/part-of: workload-2
