@@ -217,19 +217,10 @@ spec:
               const settings = JSON.parse(fs.readFileSync(settingsPath, "utf8"));
 
               Object.assign(settings, {
-                couchDB_URI: process.env.OBSIDIAN_LIVESYNC_URL,
-                couchDB_USER: process.env.OBSIDIAN_LIVESYNC_COUCHDB_USER,
-                couchDB_PASSWORD: process.env.OBSIDIAN_LIVESYNC_COUCHDB_PASSWORD,
-                couchDB_DBNAME: process.env.OBSIDIAN_LIVESYNC_DB || "obsidian-notes",
-                remoteType: "couchdb",
-                activeConfigurationId: "",
-                remoteConfigurations: {},
                 liveSync: true,
                 syncOnStart: false,
                 syncOnSave: false,
                 usePluginSync: false,
-                encrypt: true,
-                passphrase: process.env.OBSIDIAN_LIVESYNC_E2EE_PASSPHRASE,
                 usePathObfuscation: true,
                 handleFilenameCaseSensitive: false,
                 customChunkSize: 60,
