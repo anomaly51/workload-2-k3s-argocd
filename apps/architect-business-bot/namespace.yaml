@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: architect-business-bot
+  labels:
+    app.kubernetes.io/name: architect-business-bot
+    app.kubernetes.io/part-of: workload-2
