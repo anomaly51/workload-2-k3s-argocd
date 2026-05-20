@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       annotations:
-        hermes-agent/config-version: "2026-05-19-toolsets"
+        hermes-agent/config-version: "2026-05-20-high-quality-voice-livesync"
       labels:
         app.kubernetes.io/name: hermes-agent
         app.kubernetes.io/part-of: workflow-2
@@ -60,6 +60,12 @@ spec:
               value: https://hermes-agent.api-api-api.com
             - name: API_SERVER_MODEL_NAME
               value: hermes-agent
+            - name: STT_OPENAI_MODEL
+              value: gpt-4o-transcribe
+            - name: OBSIDIAN_VAULT_DIR
+              value: /opt/data/workspace/obsidian-vault
+            - name: OBSIDIAN_INBOX_DIR
+              value: /opt/data/workspace/obsidian-vault/Inbox
           envFrom:
             - secretRef:
                 name: hermes-agent-env
@@ -94,6 +100,72 @@ spec:
               mountPath: /opt/data/config.yaml
               subPath: config.yaml
               readOnly: true
+            - name: obsidian-inbox-skill
+              mountPath: /opt/data/skills/obsidian-inbox
+              readOnly: true
+        - name: livesync-cli
+          image: node:22-slim
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -ec
+            - |
+              export DEBIAN_FRONTEND=noninteractive
+              CLI_REF="${OBSIDIAN_LIVESYNC_CLI_REF:-0.25.62}"
+              CLI_DIR="/opt/data/cache/obsidian-livesync-cli/${CLI_REF}"
+              DIST="$CLI_DIR/src/apps/cli/dist/index.cjs"
+              SETTINGS_DIR="$OBSIDIAN_VAULT_DIR/.livesync"
+              SETTINGS="$SETTINGS_DIR/settings.json"
+
+              if [ ! -f "$DIST" ]; then
+                apt-get update
+                apt-get install -y --no-install-recommends git python3 make g++ ca-certificates
+                rm -rf /var/lib/apt/lists/*
+                rm -rf "$CLI_DIR"
+                git clone --depth 1 --branch "$CLI_REF" --recurse-submodules https://github.com/vrtmrz/obsidian-livesync.git "$CLI_DIR"
+                cd "$CLI_DIR"
+                if [ -f package-lock.json ]; then npm ci; else npm install; fi
+                cd src/apps/cli
+                npm run build
+              fi
+
+              mkdir -p "$OBSIDIAN_VAULT_DIR" "$OBSIDIAN_INBOX_DIR" "$SETTINGS_DIR"
+              if ! node -e 'const fs=require("fs"); const p=process.argv[1]; const s=JSON.parse(fs.readFileSync(p,"utf8")); process.exit(s && s.isConfigured ? 0 : 1)' "$SETTINGS" 2>/dev/null; then
+                rm -f "$SETTINGS"
+                for attempt in $(seq 1 60); do
+                  echo "Configuring Self-hosted LiveSync CLI, attempt ${attempt}/60"
+                  node "$DIST" init-settings --force "$SETTINGS"
+                  if printf '%s\n' "$OBSIDIAN_LIVESYNC_SETUP_PASSPHRASE" \
+                    | node "$DIST" "$OBSIDIAN_VAULT_DIR" --settings "$SETTINGS" setup "$OBSIDIAN_LIVESYNC_SETUP_URI"; then
+                    break
+                  fi
+                  rm -f "$SETTINGS"
+                  sleep 10
+                done
+                node -e 'const fs=require("fs"); const p=process.argv[1]; const s=JSON.parse(fs.readFileSync(p,"utf8")); process.exit(s && s.isConfigured ? 0 : 1)' "$SETTINGS"
+              fi
+
+              exec node "$DIST" "$OBSIDIAN_VAULT_DIR" --settings "$SETTINGS" --interval 15 daemon
+          env:
+            - name: OBSIDIAN_LIVESYNC_CLI_REF
+              value: "0.25.62"
+            - name: OBSIDIAN_VAULT_DIR
+              value: /opt/data/workspace/obsidian-vault
+            - name: OBSIDIAN_INBOX_DIR
+              value: /opt/data/workspace/obsidian-vault/Inbox
+          envFrom:
+            - secretRef:
+                name: hermes-agent-env
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 3Gi
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -101,3 +173,6 @@ spec:
         - name: config
           configMap:
             name: hermes-agent-config
+        - name: obsidian-inbox-skill
+          configMap:
+            name: hermes-agent-obsidian-inbox-skill

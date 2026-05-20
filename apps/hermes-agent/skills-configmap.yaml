@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hermes-agent-obsidian-inbox-skill
+  namespace: hermes-agent
+data:
+  SKILL.md: |
+    ---
+    name: obsidian-inbox
+    description: Capture text or transcribed Telegram voice messages into the Obsidian Inbox as Markdown notes synced by Self-hosted LiveSync.
+    ---
+
+    # Obsidian Inbox Capture
+
+    Use this skill when the user asks to save, capture, jot down, remember, log, or add a note to Obsidian, Inbox, or the raw/unprocessed notes folder. Also use it when a Telegram voice message has been transcribed and the user intent is to record the spoken content as a note.
+
+    ## Storage
+
+    Default paths:
+
+    - Vault root: `${OBSIDIAN_VAULT_DIR}` or `/opt/data/workspace/obsidian-vault`
+    - Inbox folder: `${OBSIDIAN_INBOX_DIR}` or `${OBSIDIAN_VAULT_DIR}/Inbox`
+
+    Obsidian stores notes as plain Markdown files. Do not write directly to the LiveSync CouchDB database. The `livesync-cli` sidecar mirrors the local vault directory to the existing Self-hosted LiveSync CouchDB server.
+
+    ## Workflow
+
+    1. Extract only the note content the user wants captured. Preserve the original meaning. Do not invent details.
+    2. Create the inbox folder if it does not exist.
+    3. Save one Markdown file per capture. Use a timestamped filename:
+       `YYYY-MM-DD-HHMMSS-short-title.md`
+    4. Add short YAML frontmatter:
+       `created`, `source`, `status: inbox`.
+    5. Put the captured content under `# <title>`.
+    6. Do not run git commands for these notes. Sync is handled by the LiveSync CLI sidecar.
+    7. Reply briefly with the saved path and say that LiveSync will replicate it.
+
+    ## Shell Pattern
+
+    Use `terminal` or file tools. Prefer a small Python stdlib script for safe filename slugging and Markdown writing instead of ad hoc shell escaping.

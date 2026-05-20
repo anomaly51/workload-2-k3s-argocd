@@ -8,10 +8,12 @@ data:
     [couchdb]
     single_node = true
     uuid = 2274e1a255ba5afbb55d3d51604bec1f
+    max_document_size = 50000000
 
     [chttpd]
     bind_address = any
     port = 5984
+    enable_cors = true
     max_http_request_size = 4294967296
     require_valid_user = true
 
