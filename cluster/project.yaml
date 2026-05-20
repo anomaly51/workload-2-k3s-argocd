@@ -6,7 +6,7 @@ metadata:
 spec:
   description: Generic project for applications managed by this GitOps repository.
   sourceRepos:
-    - https://github.com/your-org/your-gitops-repo.git
+    - https://github.com/anomaly51/workload-2-k3s-argocd.git
   destinations:
     - server: https://kubernetes.default.svc
       namespace: "*"
