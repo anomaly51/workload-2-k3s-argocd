@@ -21,15 +21,6 @@ spec:
         app.kubernetes.io/name: obsidian-livesync
         app.kubernetes.io/component: couchdb
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - workload-2-k3s-worker-2
       securityContext:
         fsGroup: 5984
       initContainers:
