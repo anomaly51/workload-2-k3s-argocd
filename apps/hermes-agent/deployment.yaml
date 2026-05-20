@@ -193,7 +193,7 @@ spec:
                 couchDB_URI: process.env.OBSIDIAN_LIVESYNC_URL,
                 couchDB_USER: process.env.OBSIDIAN_LIVESYNC_COUCHDB_USER,
                 couchDB_PASSWORD: process.env.OBSIDIAN_LIVESYNC_COUCHDB_PASSWORD,
-                couchDB_DBNAME: process.env.OBSIDIAN_LIVESYNC_DB || "obsidiannotes",
+                couchDB_DBNAME: process.env.OBSIDIAN_LIVESYNC_DB || "obsidian-notes",
                 liveSync: true,
                 syncOnStart: false,
                 syncOnSave: false,
@@ -238,7 +238,7 @@ spec:
             - name: OBSIDIAN_LIVESYNC_URL
               value: https://obsidian-livesync.api-api-api.com
             - name: OBSIDIAN_LIVESYNC_DB
-              value: obsidiannotes
+              value: obsidian-notes
             - name: OBSIDIAN_VAULT_DIR
               value: /opt/data/workspace/obsidian-vault
             - name: OBSIDIAN_VAULT_PATH
