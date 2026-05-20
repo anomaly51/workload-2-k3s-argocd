@@ -24,13 +24,6 @@ spec:
         app.kubernetes.io/name: hermes-agent
         app.kubernetes.io/part-of: workflow-2
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
-                    operator: DoesNotExist
       imagePullSecrets:
         - name: harbor-pull-secret
       initContainers:
@@ -43,11 +36,6 @@ spec:
             - |
               mkdir -p "$OBSIDIAN_VAULT_DIR" "$OBSIDIAN_INBOX_DIR" /opt/data/Documents
               fallback="/opt/data/Documents/Obsidian Vault"
-              old_inbox="$OBSIDIAN_VAULT_DIR/Inbox"
-              if [ -d "$old_inbox" ] && [ "$old_inbox" != "$OBSIDIAN_INBOX_DIR" ]; then
-                find "$old_inbox" -mindepth 1 -maxdepth 1 -exec mv -n -t "$OBSIDIAN_INBOX_DIR" {} +
-                rmdir "$old_inbox" 2>/dev/null || true
-              fi
               if [ -d "$fallback" ] && [ ! -L "$fallback" ]; then
                 if [ -f "$fallback/Inbox.md" ]; then
                   mv "$fallback/Inbox.md" "$OBSIDIAN_INBOX_DIR/Inbox.md"
@@ -60,7 +48,7 @@ spec:
             - name: OBSIDIAN_VAULT_DIR
               value: /opt/data/workspace/obsidian-vault
             - name: OBSIDIAN_INBOX_DIR
-              value: /opt/data/workspace/obsidian-vault/5. 📥 INBOX
+              value: /opt/data/workspace/obsidian-vault/Inbox
           resources:
             requests:
               cpu: 50m
@@ -114,7 +102,7 @@ spec:
             - name: OBSIDIAN_VAULT_PATH
               value: /opt/data/workspace/obsidian-vault
             - name: OBSIDIAN_INBOX_DIR
-              value: /opt/data/workspace/obsidian-vault/5. 📥 INBOX
+              value: /opt/data/workspace/obsidian-vault/Inbox
           envFrom:
             - secretRef:
                 name: hermes-agent-env
@@ -242,7 +230,7 @@ spec:
             - name: OBSIDIAN_VAULT_PATH
               value: /opt/data/workspace/obsidian-vault
             - name: OBSIDIAN_INBOX_DIR
-              value: /opt/data/workspace/obsidian-vault/5. 📥 INBOX
+              value: /opt/data/workspace/obsidian-vault/Inbox
           envFrom:
             - secretRef:
                 name: hermes-agent-env

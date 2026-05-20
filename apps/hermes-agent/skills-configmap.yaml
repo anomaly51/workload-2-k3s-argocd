@@ -19,7 +19,7 @@ data:
     Default paths:
 
     - Vault root: `${OBSIDIAN_VAULT_DIR}` or `/opt/data/workspace/obsidian-vault`
-    - Inbox folder: `${OBSIDIAN_INBOX_DIR}` or `${OBSIDIAN_VAULT_DIR}/5. 📥 INBOX`
+    - Inbox folder: `${OBSIDIAN_INBOX_DIR}` or `${OBSIDIAN_VAULT_DIR}/Inbox`
 
     Obsidian stores notes as plain Markdown files. Do not write directly to the LiveSync CouchDB database. The `livesync-cli` sidecar mirrors the local vault directory to the existing Self-hosted LiveSync CouchDB server.
 
