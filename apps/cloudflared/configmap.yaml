@@ -28,4 +28,14 @@ data:
         service: http://192.168.1.104
       - hostname: argo-workflows.api-api-api.com
         service: http://192.168.1.104
+      - hostname: prometheus.api-api-api.com
+        service: https://192.168.1.104
+        originRequest:
+          noTLSVerify: true
+          httpHostHeader: prometheus.api-api-api.com
+      - hostname: grafana.api-api-api.com
+        service: https://192.168.1.104
+        originRequest:
+          noTLSVerify: true
+          httpHostHeader: grafana.api-api-api.com
       - service: http_status:404
