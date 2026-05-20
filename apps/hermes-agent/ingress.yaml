@@ -5,7 +5,7 @@ metadata:
   namespace: hermes-agent
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
-    external-dns.alpha.kubernetes.io/hostname: hermes-agent.api-api-api.com
+    external-dns.alpha.kubernetes.io/hostname: hermes-agent.api-api-api.com,architect-business-bot.api-api-api.com
     external-dns.alpha.kubernetes.io/target: a6aaa50f-2590-4179-84f2-d0f18bce0587.cfargotunnel.com
     traefik.ingress.kubernetes.io/router.middlewares: hermes-agent-hermes-agent-root-redirect@kubernetescrd
 spec:
@@ -14,8 +14,19 @@ spec:
     - secretName: hermes-agent-tls
       hosts:
         - hermes-agent.api-api-api.com
+        - architect-business-bot.api-api-api.com
   rules:
     - host: hermes-agent.api-api-api.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hermes-agent
+                port:
+                  name: http
+    - host: architect-business-bot.api-api-api.com
       http:
         paths:
           - path: /
