@@ -11,3 +11,4 @@ resources:
   - applications/cloudflared.yaml
   - applications/external-dns-config.yaml
   - applications/external-dns.yaml
+  - applications/hermes-agent.yaml
