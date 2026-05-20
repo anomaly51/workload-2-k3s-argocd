@@ -114,7 +114,7 @@ spec:
             - |
               export DEBIAN_FRONTEND=noninteractive
               CLI_REF="${OBSIDIAN_LIVESYNC_CLI_REF:-0.25.62}"
-              CLI_DIR="/opt/data/cache/obsidian-livesync-cli/${CLI_REF}"
+              CLI_DIR="/tmp/obsidian-livesync-cli/${CLI_REF}"
               DIST="$CLI_DIR/src/apps/cli/dist/index.cjs"
               SETTINGS_DIR="$OBSIDIAN_VAULT_DIR/.livesync"
               SETTINGS="$SETTINGS_DIR/settings.json"
