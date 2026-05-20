@@ -11,6 +11,3 @@ resources:
   - applications/cloudflared.yaml
   - applications/external-dns-config.yaml
   - applications/external-dns.yaml
-  - applications/arc-config.yaml
-  - applications/arc-controller.yaml
-  - applications/arc-runner-set.yaml
