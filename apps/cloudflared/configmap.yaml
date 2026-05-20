@@ -24,8 +24,6 @@ data:
         service: http://traefik.kube-system.svc.cluster.local:80
       - hostname: architect-business-bot.api-api-api.com
         service: http://traefik.kube-system.svc.cluster.local:80
-      - hostname: argocd-webhook.api-api-api.com
-        service: http://traefik.kube-system.svc.cluster.local:80
       - hostname: vault.api-api-api.com
         service: http://192.168.1.104
       - hostname: harbor.api-api-api.com
