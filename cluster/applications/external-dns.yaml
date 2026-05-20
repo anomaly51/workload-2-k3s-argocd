@@ -29,7 +29,7 @@ spec:
           - --cloudflare-proxied
         domainFilters:
           - api-api-api.com
-        txtOwnerId: workload-1-k3s
+        txtOwnerId: workload-2-k3s
         sources:
           - ingress
         policy: sync
