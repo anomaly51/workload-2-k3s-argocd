@@ -29,8 +29,10 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
-                    operator: DoesNotExist
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - workload-2-k3s-worker-2
       imagePullSecrets:
         - name: harbor-pull-secret
       initContainers:
