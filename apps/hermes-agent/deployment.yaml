@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       annotations:
-        hermes-agent/config-version: "2026-05-20-required-openai-stt"
+        hermes-agent/config-version: "2026-05-20-openai-stt-envfrom"
       labels:
         app.kubernetes.io/name: hermes-agent
         app.kubernetes.io/part-of: workflow-2
@@ -64,16 +64,6 @@ spec:
               value: gpt-4o-transcribe
             - name: STT_OPENAI_BASE_URL
               value: https://api.openai.com/v1
-            - name: VOICE_TOOLS_OPENAI_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: hermes-agent-env
-                  key: VOICE_TOOLS_OPENAI_KEY
-            - name: OPENAI_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: hermes-agent-env
-                  key: VOICE_TOOLS_OPENAI_KEY
             - name: OBSIDIAN_VAULT_DIR
               value: /opt/data/workspace/obsidian-vault
             - name: OBSIDIAN_INBOX_DIR
