@@ -26,7 +26,7 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: bot
-          image: harbor.api-api-api.com/architect-business-bot/bot:pending
+          image: harbor.api-api-api.com/architect-business-bot/bot:main-9-4dc98623b3426f6100fd64e1fb0f5458ceda178f
           imagePullPolicy: IfNotPresent
           lifecycle:
             postStart:
