@@ -26,7 +26,7 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: bot
-          image: harbor.api-api-api.com/architect-business-bot/bot:main-32-5262321e92e151c4908a54b047bdbd5d592eedd7
+          image: harbor.api-api-api.com/architect-business-bot/bot:main-33-cc8ecbee4442d1a0dcf709144f180fa9cdad2511
           imagePullPolicy: IfNotPresent
           lifecycle:
             postStart:
@@ -43,8 +43,22 @@ spec:
               value: "13:30"
             - name: DAILY_SUMMARY_ENABLED
               value: "true"
+            - name: DEEPSEEK_MAX_TOKENS
+              value: "220"
+            - name: MAX_HISTORY_MESSAGES
+              value: "7"
+            - name: AUTO_PAUSE_AFTER_OWNER_MESSAGE_SECONDS
+              value: "180"
+            - name: DAILY_SUMMARY_LOOKBACK_HOURS
+              value: "24"
+            - name: DAILY_SUMMARY_TZ
+              value: "Europe/Kyiv"
+            - name: DAILY_SUMMARY_TIME
+              value: "13:30"
+            - name: DAILY_SUMMARY_ENABLED
+              value: "true"
             - name: APP_VERSION
-              value: "main-32-5262321e92e151c4908a54b047bdbd5d592eedd7"
+              value: "main-33-cc8ecbee4442d1a0dcf709144f180fa9cdad2511"
             - name: PUBLIC_WEBHOOK_URL
               value: https://architect-business-bot.api-api-api.com
             - name: OWNER_TELEGRAM_ID
