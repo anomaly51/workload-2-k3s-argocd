@@ -12,3 +12,4 @@ resources:
   - applications/external-dns-config.yaml
   - applications/external-dns.yaml
   - applications/hermes-agent.yaml
+  - applications/obsidian-livesync.yaml

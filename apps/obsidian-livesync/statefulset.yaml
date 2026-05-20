@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: obsidian-livesync-couchdb
+  namespace: obsidian-livesync
+  labels:
+    app.kubernetes.io/name: obsidian-livesync
+    app.kubernetes.io/component: couchdb
+spec:
+  serviceName: obsidian-livesync-couchdb
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: obsidian-livesync
+      app.kubernetes.io/component: couchdb
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: obsidian-livesync
+        app.kubernetes.io/component: couchdb
+    spec:
+      securityContext:
+        fsGroup: 5984
+      containers:
+        - name: couchdb
+          image: couchdb:3.5.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 5984
+          env:
+            - name: COUCHDB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: obsidian-livesync-couchdb
+                  key: adminUsername
+            - name: COUCHDB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: obsidian-livesync-couchdb
+                  key: adminPassword
+            - name: COUCHDB_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: obsidian-livesync-couchdb
+                  key: cookieAuthSecret
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              memory: 1Gi
+          volumeMounts:
+            - name: data
+              mountPath: /opt/couchdb/data
+            - name: config
+              mountPath: /opt/couchdb/etc/local.d/obsidian-livesync.ini
+              subPath: obsidian-livesync.ini
+      volumes:
+        - name: config
+          configMap:
+            name: obsidian-livesync-couchdb-config
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: nfs-client
+        resources:
+          requests:
+            storage: 10Gi

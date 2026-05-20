@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: obsidian-livesync-couchdb-config
+  namespace: obsidian-livesync
+data:
+  obsidian-livesync.ini: |
+    [couchdb]
+    single_node = true
+    uuid = 2274e1a255ba5afbb55d3d51604bec1f
+
+    [chttpd]
+    bind_address = any
+    port = 5984
+    max_http_request_size = 4294967296
+    require_valid_user = true
+
+    [chttpd_auth]
+    require_valid_user = true
+    authentication_redirect = /_utils/session.html
+
+    [httpd]
+    enable_cors = true
+    WWW-Authenticate = Basic realm="couchdb"
+
+    [cors]
+    origins = app://obsidian.md,capacitor://localhost,http://localhost
+    credentials = true
+    headers = accept,authorization,content-type,origin,referer
+    methods = GET,PUT,POST,HEAD,DELETE
+    max_age = 3600
