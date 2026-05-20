@@ -3,6 +3,8 @@ kind: StatefulSet
 metadata:
   name: obsidian-livesync-couchdb
   namespace: obsidian-livesync
+  annotations:
+    argocd.argoproj.io/sync-options: Replace=true
   labels:
     app.kubernetes.io/name: obsidian-livesync
     app.kubernetes.io/component: couchdb
