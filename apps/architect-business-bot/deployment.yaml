@@ -26,7 +26,7 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: bot
-          image: harbor.api-api-api.com/architect-business-bot/bot:main-35-6fd4fb9cd20e2857500972d2e211edd925f9dc09
+          image: harbor.api-api-api.com/architect-business-bot/bot:main-36-a00fdd7e39cdb1fc33fb910c10751de6332cfcd5
           imagePullPolicy: IfNotPresent
           lifecycle:
             postStart:
@@ -36,7 +36,7 @@ spec:
                   - set_webhook.py
           env:
             - name: APP_VERSION
-              value: "main-35-6fd4fb9cd20e2857500972d2e211edd925f9dc09"
+              value: "main-36-a00fdd7e39cdb1fc33fb910c10751de6332cfcd5"
             - name: PUBLIC_WEBHOOK_URL
               value: https://architect-business-bot.api-api-api.com
             - name: OWNER_TELEGRAM_ID
