@@ -66,3 +66,15 @@ spec:
               memory: 128Mi
             limits:
               memory: 512Mi
+          volumeMounts:
+            - name: google-services
+              mountPath: /code/google_services.json
+              subPath: google_services.json
+              readOnly: true
+      volumes:
+        - name: google-services
+          secret:
+            secretName: pingme-backend-env
+            items:
+              - key: google_services.json
+                path: google_services.json
