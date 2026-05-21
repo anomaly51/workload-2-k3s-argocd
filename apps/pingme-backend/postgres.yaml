@@ -4,7 +4,7 @@ metadata:
   name: postgres
   namespace: pingme-backend
   annotations:
-    argocd.argoproj.io/sync-options: Replace=true
+    argocd.argoproj.io/sync-options: Force=true,Replace=true
   labels:
     app.kubernetes.io/name: pingme-postgres
     app.kubernetes.io/part-of: workload-2
