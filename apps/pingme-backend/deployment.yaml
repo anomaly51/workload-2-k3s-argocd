@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: pingme-backend
   namespace: pingme-backend
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
   labels:
     app.kubernetes.io/name: pingme-backend
     app.kubernetes.io/part-of: workload-2
