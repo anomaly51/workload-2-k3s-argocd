@@ -26,7 +26,7 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: bot
-          image: harbor.api-api-api.com/architect-business-bot/bot:main-37-fd41dbc0376116ff83aebaefb2b708af9e93eb00
+          image: harbor.api-api-api.com/architect-business-bot/bot:main-38-de5aaace1ba11a675d590589a6eb9727be124117
           imagePullPolicy: IfNotPresent
           lifecycle:
             postStart:
@@ -36,7 +36,7 @@ spec:
                   - set_webhook.py
           env:
             - name: APP_VERSION
-              value: "main-37-fd41dbc0376116ff83aebaefb2b708af9e93eb00"
+              value: "main-38-de5aaace1ba11a675d590589a6eb9727be124117"
             - name: PUBLIC_WEBHOOK_URL
               value: https://architect-business-bot.api-api-api.com
             - name: OWNER_TELEGRAM_ID
@@ -58,7 +58,7 @@ spec:
             - name: DEEPSEEK_MAX_TOKENS
               value: "220"
             - name: AUTO_PAUSE_AFTER_OWNER_MESSAGE_SECONDS
-              value: "180"
+              value: "900"
             - name: MAX_HISTORY_MESSAGES
               value: "7"
             - name: DAILY_SUMMARY_ENABLED
