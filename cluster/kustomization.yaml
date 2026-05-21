@@ -15,3 +15,4 @@ resources:
   - applications/architect-business-bot.yaml
   - applications/hermes-agent.yaml
   - applications/obsidian-livesync.yaml
+  - applications/pingme-backend.yaml

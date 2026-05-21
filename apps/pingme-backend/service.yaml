@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pingme-backend
+  namespace: pingme-backend
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: "8000"
+  labels:
+    app.kubernetes.io/name: pingme-backend
+    app.kubernetes.io/part-of: workload-2
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: pingme-backend
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
