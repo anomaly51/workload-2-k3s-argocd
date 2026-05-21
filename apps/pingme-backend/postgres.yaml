@@ -62,6 +62,7 @@ spec:
         accessModes:
           - ReadWriteOnce
         storageClassName: nfs-client
+        volumeMode: Filesystem
         resources:
           requests:
             storage: 5Gi
