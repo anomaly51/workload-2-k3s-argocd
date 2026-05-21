@@ -28,7 +28,7 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: gateway
-          image: harbor.api-api-api.com/hermes-agent/gateway:main-8-a01b9718f29cdefaf997d86c6ce08b859c88a487
+          image: harbor.api-api-api.com/hermes-agent/gateway:main-10-19402537d087313fce8e950feaed71eda73fa229
           imagePullPolicy: IfNotPresent
           args:
             - gateway
