@@ -11,6 +11,7 @@ resources:
   - applications/cloudflared.yaml
   - applications/external-dns-config.yaml
   - applications/external-dns.yaml
+  - applications/architect-business-bot-logs.yaml
   - applications/architect-business-bot.yaml
   - applications/hermes-agent.yaml
   - applications/obsidian-livesync.yaml
