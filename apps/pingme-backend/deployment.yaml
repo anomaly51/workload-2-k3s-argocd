@@ -24,6 +24,14 @@ spec:
         app.kubernetes.io/name: pingme-backend
         app.kubernetes.io/part-of: workload-2
     spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: busybox:1.36
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - until nc -z postgres 5432; do sleep 2; done
       imagePullSecrets:
         - name: harbor-pull-secret
       containers:
