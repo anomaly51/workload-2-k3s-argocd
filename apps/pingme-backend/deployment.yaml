@@ -26,7 +26,7 @@ spec:
     spec:
       initContainers:
         - name: wait-for-postgres
-          image: harbor.api-api-api.com/pingme/backend:main-6-3f14dc3d0660e1ebc18e544e29f098768d6d4695
+          image: busybox:1.36
           imagePullPolicy: IfNotPresent
           command:
             - sh
@@ -36,7 +36,7 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: backend
-          image: harbor.api-api-api.com/pingme/backend:main-5-9fcff5f6c126b31ec124016173533a0c644da70e
+          image: harbor.api-api-api.com/pingme/backend:main-6-3f14dc3d0660e1ebc18e544e29f098768d6d4695
           imagePullPolicy: IfNotPresent
           env:
             - name: APP_VERSION
