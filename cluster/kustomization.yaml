@@ -13,6 +13,7 @@ resources:
   - applications/external-dns.yaml
   - applications/architect-business-bot-logs.yaml
   - applications/architect-business-bot.yaml
+  - applications/bot-motivation.yaml
   - applications/hermes-agent.yaml
   - applications/obsidian-livesync.yaml
   - applications/pingme-backend.yaml

@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bot-motivation
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "60"
+spec:
+  project: gitops-apps
+  source:
+    repoURL: https://github.com/anomaly51/workload-2-k3s-argocd.git
+    targetRevision: main
+    path: apps/bot-motivation
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: bot-motivation
+  ignoreDifferences:
+    - group: external-secrets.io
+      kind: ExternalSecret
+      jsonPointers:
+        - /spec/target/deletionPolicy
+        - /spec/data/0/remoteRef/conversionStrategy
+        - /spec/data/0/remoteRef/decodingStrategy
+        - /spec/data/0/remoteRef/metadataPolicy
+        - /spec/data/0/remoteRef/nullBytePolicy
+        - /spec/data/1/remoteRef/conversionStrategy
+        - /spec/data/1/remoteRef/decodingStrategy
+        - /spec/data/1/remoteRef/metadataPolicy
+        - /spec/data/1/remoteRef/nullBytePolicy
+        - /spec/data/2/remoteRef/conversionStrategy
+        - /spec/data/2/remoteRef/decodingStrategy
+        - /spec/data/2/remoteRef/metadataPolicy
+        - /spec/data/2/remoteRef/nullBytePolicy
+        - /spec/data/3/remoteRef/conversionStrategy
+        - /spec/data/3/remoteRef/decodingStrategy
+        - /spec/data/3/remoteRef/metadataPolicy
+        - /spec/data/3/remoteRef/nullBytePolicy
+        - /spec/data/4/remoteRef/conversionStrategy
+        - /spec/data/4/remoteRef/decodingStrategy
+        - /spec/data/4/remoteRef/metadataPolicy
+        - /spec/data/4/remoteRef/nullBytePolicy
+        - /spec/data/5/remoteRef/conversionStrategy
+        - /spec/data/5/remoteRef/decodingStrategy
+        - /spec/data/5/remoteRef/metadataPolicy
+        - /spec/data/5/remoteRef/nullBytePolicy
+        - /spec/data/6/remoteRef/conversionStrategy
+        - /spec/data/6/remoteRef/decodingStrategy
+        - /spec/data/6/remoteRef/metadataPolicy
+        - /spec/data/6/remoteRef/nullBytePolicy
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

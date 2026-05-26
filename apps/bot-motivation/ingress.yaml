@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bot-motivation
+  namespace: bot-motivation
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    external-dns.alpha.kubernetes.io/hostname: pets-void.api-api-api.com
+    external-dns.alpha.kubernetes.io/target: a6aaa50f-2590-4179-84f2-d0f18bce0587.cfargotunnel.com
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    external-dns.alpha.kubernetes.io/ttl: "120"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - pets-void.api-api-api.com
+      secretName: bot-motivation-tls
+  rules:
+    - host: pets-void.api-api-api.com
+      http:
+        paths:
+          - path: /tma
+            pathType: Prefix
+            backend:
+              service:
+                name: bot-motivation
+                port:
+                  name: http
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: bot-motivation
+                port:
+                  name: http
+          - path: /health
+            pathType: Exact
+            backend:
+              service:
+                name: bot-motivation
+                port:
+                  name: http

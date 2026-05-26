@@ -24,6 +24,8 @@ data:
         service: http://traefik.kube-system.svc.cluster.local:80
       - hostname: architect-business-bot.api-api-api.com
         service: http://traefik.kube-system.svc.cluster.local:80
+      - hostname: pets-void.api-api-api.com
+        service: http://traefik.kube-system.svc.cluster.local:80
       - hostname: pingme-backend.api-api-api.com
         service: http://traefik.kube-system.svc.cluster.local:80
       - hostname: uptime-monitor.api-api-api.com
