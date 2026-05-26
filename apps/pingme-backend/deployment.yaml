@@ -36,11 +36,11 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: backend
-          image: harbor.api-api-api.com/pingme/backend:main-25-961d6ebb8a569191054dfca36aad3c17a72cb47e
+          image: harbor.api-api-api.com/pingme/backend:main-26-4cd8b98edca8a6ea04672109b280adfa506b2f5f
           imagePullPolicy: IfNotPresent
           env:
             - name: APP_VERSION
-              value: "main-25-961d6ebb8a569191054dfca36aad3c17a72cb47e"
+              value: "main-26-4cd8b98edca8a6ea04672109b280adfa506b2f5f"
             - name: APP_BASE_URL
               value: https://pingme-backend.api-api-api.com
             - name: ALGORITHM
