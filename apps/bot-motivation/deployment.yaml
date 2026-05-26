@@ -26,11 +26,11 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: motivator-bot
-          image: harbor.api-api-api.com/bot-motivation/motivator-bot:main-5-d38d57531a2ba51a2a4d389c6213146b2d84f63c
+          image: harbor.api-api-api.com/bot-motivation/motivator-bot:main-6-7f5fd085c1dd2206a9c73aa4cb0e40824fa47c8d
           imagePullPolicy: IfNotPresent
           env:
             - name: APP_VERSION
-              value: "main-5-d38d57531a2ba51a2a4d389c6213146b2d84f63c"
+              value: "main-6-7f5fd085c1dd2206a9c73aa4cb0e40824fa47c8d"
             - name: PYTHONUNBUFFERED
               value: "1"
             - name: API_HOST
