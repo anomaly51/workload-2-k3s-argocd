@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       annotations:
-        config.kubernetes.io/reload: shared-tunnel-all-routes-v6
+        config.kubernetes.io/reload: shared-tunnel-all-routes-v7
       labels:
         app: cloudflared
     spec:
