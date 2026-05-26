@@ -36,11 +36,11 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: api
-          image: harbor.api-api-api.com/uptime-monitor/app:bootstrap
+          image: harbor.api-api-api.com/uptime-monitor/app:main-3-f3a9edb592e357c9f317af5006e9b6e58eba9e3c
           imagePullPolicy: IfNotPresent
           env:
             - name: APP_VERSION
-              value: "bootstrap"
+              value: "main-3-f3a9edb592e357c9f317af5006e9b6e58eba9e3c"
             - name: PROJECT_NAME
               value: Uptime Monitor
             - name: APP_BASE_URL
@@ -149,7 +149,7 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: worker
-          image: harbor.api-api-api.com/uptime-monitor/app:bootstrap
+          image: harbor.api-api-api.com/uptime-monitor/app:main-3-f3a9edb592e357c9f317af5006e9b6e58eba9e3c
           imagePullPolicy: IfNotPresent
           command:
             - python
@@ -157,7 +157,7 @@ spec:
             - app.worker
           env:
             - name: APP_VERSION
-              value: "bootstrap"
+              value: "main-3-f3a9edb592e357c9f317af5006e9b6e58eba9e3c"
             - name: PROJECT_NAME
               value: Uptime Monitor
             - name: APP_BASE_URL
@@ -199,7 +199,7 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: scheduler
-          image: harbor.api-api-api.com/uptime-monitor/app:bootstrap
+          image: harbor.api-api-api.com/uptime-monitor/app:main-3-f3a9edb592e357c9f317af5006e9b6e58eba9e3c
           imagePullPolicy: IfNotPresent
           command:
             - python
@@ -207,7 +207,7 @@ spec:
             - app.scheduler
           env:
             - name: APP_VERSION
-              value: "bootstrap"
+              value: "main-3-f3a9edb592e357c9f317af5006e9b6e58eba9e3c"
             - name: PROJECT_NAME
               value: Uptime Monitor
             - name: APP_BASE_URL
@@ -251,7 +251,7 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: bot
-          image: harbor.api-api-api.com/uptime-monitor/app:bootstrap
+          image: harbor.api-api-api.com/uptime-monitor/app:main-3-f3a9edb592e357c9f317af5006e9b6e58eba9e3c
           imagePullPolicy: IfNotPresent
           command:
             - python
@@ -259,7 +259,7 @@ spec:
             - app.bot
           env:
             - name: APP_VERSION
-              value: "bootstrap"
+              value: "main-3-f3a9edb592e357c9f317af5006e9b6e58eba9e3c"
             - name: PROJECT_NAME
               value: Uptime Monitor
             - name: APP_BASE_URL
