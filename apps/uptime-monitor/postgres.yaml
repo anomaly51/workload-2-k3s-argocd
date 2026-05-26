@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: uptime-monitor
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+  labels:
+    app.kubernetes.io/name: uptime-monitor-postgres
+    app.kubernetes.io/part-of: workload-2
+spec:
+  serviceName: postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: uptime-monitor-postgres
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: uptime-monitor-postgres
+        app.kubernetes.io/part-of: workload-2
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POSTGRES_DB
+              value: uptime
+            - name: POSTGRES_USER
+              value: uptime
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: uptime-monitor-env
+                  key: POSTGRES_PASSWORD
+          ports:
+            - name: postgres
+              containerPort: 5432
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pg_isready -U uptime -d uptime
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 6
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              memory: 512Mi
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: nfs-client
+        resources:
+          requests:
+            storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: uptime-monitor
+  labels:
+    app.kubernetes.io/name: uptime-monitor-postgres
+    app.kubernetes.io/part-of: workload-2
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: uptime-monitor-postgres
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: postgres

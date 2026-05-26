@@ -26,6 +26,8 @@ data:
         service: http://traefik.kube-system.svc.cluster.local:80
       - hostname: pingme-backend.api-api-api.com
         service: http://traefik.kube-system.svc.cluster.local:80
+      - hostname: uptime-monitor.api-api-api.com
+        service: http://traefik.kube-system.svc.cluster.local:80
       - hostname: argocd.api-api-api.com
         service: https://192.168.1.7
         originRequest:

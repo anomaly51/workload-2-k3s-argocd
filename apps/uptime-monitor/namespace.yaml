@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: uptime-monitor
+  labels:
+    app.kubernetes.io/name: uptime-monitor
+    app.kubernetes.io/part-of: workload-2

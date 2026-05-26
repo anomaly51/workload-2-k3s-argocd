@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: uptime-monitor
+  namespace: uptime-monitor
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    external-dns.alpha.kubernetes.io/hostname: uptime-monitor.api-api-api.com
+    external-dns.alpha.kubernetes.io/target: a6aaa50f-2590-4179-84f2-d0f18bce0587.cfargotunnel.com
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    external-dns.alpha.kubernetes.io/ttl: "120"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - uptime-monitor.api-api-api.com
+      secretName: uptime-monitor-tls
+  rules:
+    - host: uptime-monitor.api-api-api.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: uptime-monitor
+                port:
+                  name: http
