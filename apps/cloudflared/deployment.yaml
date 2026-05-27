@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       annotations:
-        config.kubernetes.io/reload: shared-tunnel-all-routes-v7
+        config.kubernetes.io/reload: obsidian-livesync-route-v8
       labels:
         app: cloudflared
     spec:
