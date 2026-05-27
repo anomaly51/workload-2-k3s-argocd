@@ -30,11 +30,11 @@ data:
         service: http://traefik.kube-system.svc.cluster.local:80
       - hostname: uptime-monitor.api-api-api.com
         service: http://traefik.kube-system.svc.cluster.local:80
-      - hostname: argocd.api-api-api.com
+      - hostname: argocd-workload-2.api-api-api.com
         service: https://192.168.1.7
         originRequest:
           noTLSVerify: true
-          httpHostHeader: argocd.api-api-api.com
+          httpHostHeader: argocd-workload-2.api-api-api.com
       - hostname: vault.api-api-api.com
         service: http://192.168.1.104
       - hostname: harbor.api-api-api.com
