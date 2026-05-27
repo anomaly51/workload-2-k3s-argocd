@@ -36,11 +36,11 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: api
-          image: harbor.api-api-api.com/uptime-monitor/app:main-19-1d791e9ad7c3ac90fe3a61f09e8c1dd0dc8e5e08
+          image: harbor.api-api-api.com/uptime-monitor/app:main-20-ae63d3e435e609f950618f77892ef2ae7653ea1c
           imagePullPolicy: IfNotPresent
           env:
             - name: APP_VERSION
-              value: "main-19-1d791e9ad7c3ac90fe3a61f09e8c1dd0dc8e5e08"
+              value: "main-20-ae63d3e435e609f950618f77892ef2ae7653ea1c"
             - name: PROJECT_NAME
               value: Uptime Monitor
             - name: APP_BASE_URL
@@ -149,7 +149,7 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: worker
-          image: harbor.api-api-api.com/uptime-monitor/app:main-19-1d791e9ad7c3ac90fe3a61f09e8c1dd0dc8e5e08
+          image: harbor.api-api-api.com/uptime-monitor/app:main-20-ae63d3e435e609f950618f77892ef2ae7653ea1c
           imagePullPolicy: IfNotPresent
           command:
             - python
@@ -157,7 +157,7 @@ spec:
             - app.worker
           env:
             - name: APP_VERSION
-              value: "main-19-1d791e9ad7c3ac90fe3a61f09e8c1dd0dc8e5e08"
+              value: "main-20-ae63d3e435e609f950618f77892ef2ae7653ea1c"
             - name: PROJECT_NAME
               value: Uptime Monitor
             - name: APP_BASE_URL
@@ -199,7 +199,7 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: scheduler
-          image: harbor.api-api-api.com/uptime-monitor/app:main-19-1d791e9ad7c3ac90fe3a61f09e8c1dd0dc8e5e08
+          image: harbor.api-api-api.com/uptime-monitor/app:main-20-ae63d3e435e609f950618f77892ef2ae7653ea1c
           imagePullPolicy: IfNotPresent
           command:
             - python
@@ -207,7 +207,7 @@ spec:
             - app.scheduler
           env:
             - name: APP_VERSION
-              value: "main-19-1d791e9ad7c3ac90fe3a61f09e8c1dd0dc8e5e08"
+              value: "main-20-ae63d3e435e609f950618f77892ef2ae7653ea1c"
             - name: PROJECT_NAME
               value: Uptime Monitor
             - name: APP_BASE_URL
@@ -251,7 +251,7 @@ spec:
         - name: harbor-pull-secret
       containers:
         - name: bot
-          image: harbor.api-api-api.com/uptime-monitor/app:main-19-1d791e9ad7c3ac90fe3a61f09e8c1dd0dc8e5e08
+          image: harbor.api-api-api.com/uptime-monitor/app:main-20-ae63d3e435e609f950618f77892ef2ae7653ea1c
           imagePullPolicy: IfNotPresent
           command:
             - python
@@ -259,7 +259,7 @@ spec:
             - app.bot
           env:
             - name: APP_VERSION
-              value: "main-19-1d791e9ad7c3ac90fe3a61f09e8c1dd0dc8e5e08"
+              value: "main-20-ae63d3e435e609f950618f77892ef2ae7653ea1c"
             - name: PROJECT_NAME
               value: Uptime Monitor
             - name: APP_BASE_URL
