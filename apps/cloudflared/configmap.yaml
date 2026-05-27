@@ -21,7 +21,7 @@ data:
       - hostname: hermes-agent.api-api-api.com
         service: http://traefik.kube-system.svc.cluster.local:80
       - hostname: obsidian-livesync.api-api-api.com
-        service: http://traefik.kube-system.svc.cluster.local:80
+        service: http://192.168.1.104
       - hostname: architect-business-bot.api-api-api.com
         service: http://traefik.kube-system.svc.cluster.local:80
       - hostname: pets-void.api-api-api.com
