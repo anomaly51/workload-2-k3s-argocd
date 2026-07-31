@@ -5,10 +5,7 @@ metadata:
   namespace: bot-motivation
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
-    external-dns.alpha.kubernetes.io/hostname: pets-void.api-api-api.com
-    external-dns.alpha.kubernetes.io/target: a6aaa50f-2590-4179-84f2-d0f18bce0587.cfargotunnel.com
-    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-    external-dns.alpha.kubernetes.io/ttl: "120"
+    external-dns.alpha.kubernetes.io/controller: ignore
 spec:
   ingressClassName: traefik
   tls:
@@ -27,6 +24,13 @@ spec:
                 port:
                   name: http
           - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: bot-motivation
+                port:
+                  name: http
+          - path: /casino
             pathType: Prefix
             backend:
               service:
