@@ -26,8 +26,6 @@ data:
         service: http://192.168.1.7
       - hostname: pets-void.api-api-api.com
         service: http://192.168.1.7
-      - hostname: pingme-backend.api-api-api.com
-        service: http://192.168.1.7
       - hostname: uptime-monitor.api-api-api.com
         service: http://192.168.1.7
       - hostname: argocd-workload-1.api-api-api.com
