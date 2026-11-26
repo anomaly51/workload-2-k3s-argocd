@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    app.kubernetes.io/description: Find Offer Fast group learning backend
-  name: pingme-backend
-  labels:
-    app.kubernetes.io/name: pingme-backend
-    app.kubernetes.io/part-of: workload-2
